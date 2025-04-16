@@ -12,13 +12,13 @@ services:
       timeout: 10s
       retries: 3
       
-  nginx-proxy:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
-    ports:
-      - "7878:7878"
-    depends_on:
-      - translation-service
+  # nginx-proxy:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./nginx/conf.d:/etc/nginx/conf.d
+  #   ports:
+  #     - "7878:7878"
+  #   depends_on:
+  #     - translation-service
