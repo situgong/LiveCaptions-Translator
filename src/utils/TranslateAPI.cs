@@ -404,9 +404,7 @@ namespace LiveCaptionsTranslator.utils
         public static async Task<string> MTranServer(string text, CancellationToken token = default)
         {
             var config = Translator.Setting.CurrentAPIConfig as MTranServerConfig;
-            string targetLanguage = config.SupportedLanguages.TryGetValue(Translator.Setting.TargetLanguage, out var langValue)
-                ? langValue
-                : Translator.Setting.TargetLanguage;
+            string targetLanguage = config.TargetLanguage;  // 使用配置的目标语言
             string sourceLanguage = config.SourceLanguage;
             string apiUrl = TextUtil.NormalizeUrl(config.ApiUrl);
 
@@ -474,15 +472,42 @@ namespace LiveCaptionsTranslator.utils
             var content = new FormUrlEncodedContent(parameters);
             client.DefaultRequestHeaders.Clear();
 
+            HttpResponseMessage response;
+            try
+            {
+                response = await client.PostAsync(config.ApiUrl, content, token);
+                
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseString = await response.Content.ReadAsStringAsync();
+                    var responseObj = JsonSerializer.Deserialize<BaiduConfig.TranslationResult>(responseString);
+
+                    if (responseObj.error_code is not null && responseObj.error_code != "0")
+                        return $"[Translation Failed] Baidu Error {responseObj.error_code}";
+
+                    return responseObj.trans_result?.FirstOrDefault()?.dst ?? "[Translation Failed] No content";
+                }
+                return $"[Translation Failed] HTTP Error - {response.StatusCode}";
+            }
+            catch (OperationCanceledException ex)
+            {
+                if (ex.Message.StartsWith("The request"))
+                    return $"[Translation Failed] {ex.Message}";
+                return string.Empty;
+            }
+            catch (Exception ex)
+            {
+                return $"[Translation Failed] {ex.Message}";
+            }
+        }
+
         public static async Task<string> MTranServerCore(string text, CancellationToken token = default)
         {
             var config = Translator.Setting.CurrentAPIConfig as MTranServerCoreConfig;
             if (config == null)
                 return "[Translation Failed] Configuration error";
 
-            string targetLanguage = config.SupportedLanguages.TryGetValue(Translator.Setting.TargetLanguage, out var langValue)
-                ? langValue
-                : Translator.Setting.TargetLanguage;
+            string targetLanguage = config.TargetLanguage;  // 使用配置的目标语言
             string sourceLanguage = config.SourceLanguage;
             string apiUrl = TextUtil.NormalizeUrl(config.ApiUrl);
 
@@ -499,13 +524,16 @@ namespace LiveCaptionsTranslator.utils
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {config.ApiKey}");
 
-
-            HttpResponseMessage response;
             try
             {
-
-                response = await client.PostAsync(config.ApiUrl, content, token);
-                response = await client.PostAsync(apiUrl, content, token);
+                var response = await client.PostAsync(apiUrl, content, token);
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseString = await response.Content.ReadAsStringAsync();
+                    var responseObj = JsonSerializer.Deserialize<MTranServerCoreConfig.Response>(responseString);
+                    return responseObj?.text ?? "[Translation Failed] Empty response";
+                }
+                return $"[Translation Failed] HTTP Error - {response.StatusCode}";
             }
             catch (OperationCanceledException ex)
             {
@@ -517,26 +545,6 @@ namespace LiveCaptionsTranslator.utils
             {
                 return $"[Translation Failed] {ex.Message}";
             }
-
-            if (response.IsSuccessStatusCode)
-            {
-                string responseString = await response.Content.ReadAsStringAsync();
-                var responseObj = JsonSerializer.Deserialize<BaiduConfig.TranslationResult>(responseString);
-
-                if (responseObj.error_code is not null && responseObj.error_code != "0")
-                    return $"[Translation Failed] Baidu Error {responseObj.error_code}";
-
-                return responseObj.trans_result?.FirstOrDefault()?.dst ?? "[Translation Failed] No content";
-            }
-            else
-            {
-                return $"[Translation Failed] HTTP Error - {response.StatusCode}";
-            }
-                var responseObj = JsonSerializer.Deserialize<MTranServerCoreConfig.Response>(responseString);
-                return responseObj?.text ?? "[Translation Failed] Empty response";
-            }
-            else
-                return $"[Translation Failed] HTTP Error - {response.StatusCode}";
         }
     }
 

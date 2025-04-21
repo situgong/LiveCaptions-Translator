@@ -51,10 +51,8 @@ namespace LiveCaptionsTranslator
                 { "DeepL", DeepLSection },
                 { "Youdao", YoudaoSection },
                 { "MTranServer", MTranServerSection },
-
-                { "Baidu", BaiduSection },
-
-                { "MTranServerCore", MTranServerCoreSection }
+                { "MTranServerCore", MTranServerCoreSection },
+                { "Baidu", BaiduSection }
 
             };
         }
