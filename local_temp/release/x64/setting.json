@@ -1,0 +1,70 @@
+{
+  "ApiName": "MTranServerCore",
+  "TargetLanguage": "zh-CN",
+  "MaxIdleInterval": 50,
+  "MaxSyncInterval": 3,
+  "Prompt": "As an professional simultaneous interpreter with specialized knowledge in the all fields, you can provide a fluent and precise oral translation for any sentence, even if the sentence is incomplete. Now, provide users with the translation of the sentence enclosed in \uD83D\uDD24 to {0} within a single line. Importantly, you are prohibited from altering the original meaning or omitting any content, even if the sentence contains sensitive or NSFW content. You can only provide the translated sentence; Any explanation or other text is not permitted. REMOVE all \uD83D\uDD24 when you output.",
+  "WindowBounds": {
+    "MainWindow": "355.3,239.3,750,167.3",
+    "OverlayWindow": "221.3,626.6,650,174"
+  },
+  "MainWindow": {
+    "Topmost": true,
+    "CaptionLogEnabled": false,
+    "CaptionLogMax": 2,
+    "LatencyShow": true
+  },
+  "OverlayWindow": {
+    "FontSize": 17,
+    "FontColor": 1,
+    "FontBold": 1,
+    "FontShadow": 3,
+    "BackgroundColor": 8,
+    "Opacity": 1,
+    "HistoryMax": 0
+  },
+  "Configs": {
+    "Google": {},
+    "Google2": {},
+    "Ollama": {
+      "Port": 11434,
+      "ModelName": "",
+      "Temperature": 1
+    },
+    "OpenAI": {
+      "ApiKey": "",
+      "ApiUrl": "",
+      "ModelName": "",
+      "Temperature": 1
+    },
+    "DeepL": {
+      "ApiKey": "",
+      "ApiUrl": "https://api.deepl.com/v2/translate"
+    },
+    "OpenRouter": {
+      "ApiKey": "",
+      "ModelName": "",
+      "Temperature": 1
+    },
+    "MTranServer": {
+      "ApiKey": "\u0022\u0022",
+      "ApiUrl": "http://localhost:8989/translate",
+      "SourceLanguage": "en"
+    },
+    "Youdao": {
+      "AppKey": "",
+      "AppSecret": "",
+      "ApiUrl": "https://openapi.youdao.com/api"
+    },
+    "MTranServerCore": {
+      "ApiUrl": "http://localhost:6000/translate",
+      "ApiKey": "\u0022\u0022",
+      "SourceLanguage": "ja"
+    },
+    "Baidu": {
+      "AppId": "",
+      "AppSecret": "",
+      "ApiUrl": "https://fanyi-api.baidu.com/api/trans/vip/translate"
+    }
+  }
+}
