@@ -307,6 +307,7 @@ namespace LiveCaptionsTranslator.models
         }
     }
 
+
     public class BaiduConfig : TranslateAPIConfig
     {
         public class TransResult
@@ -367,6 +368,66 @@ namespace LiveCaptionsTranslator.models
                 apiUrl = value;
                 OnPropertyChanged("ApiUrl");
             }
+        }
+
+    public class MTranServerCoreConfig : TranslateAPIConfig
+    {
+        private string apiUrl = "http://localhost:3000/translate";
+        private string apiKey = "";
+        private string sourceLanguage = "en";
+
+        public string ApiUrl
+        {
+            get => apiUrl;
+            set
+            {
+                apiUrl = value;
+                OnPropertyChanged("ApiUrl");
+            }
+        }
+
+        public string ApiKey
+        {
+            get => apiKey;
+            set
+            {
+                apiKey = value;
+                OnPropertyChanged("ApiKey");
+            }
+        }
+
+        public string SourceLanguage
+        {
+            get => sourceLanguage;
+            set
+            {
+                sourceLanguage = value;
+                OnPropertyChanged("SourceLanguage");
+            }
+        }
+
+        [JsonIgnore]
+        public override Dictionary<string, string> SupportedLanguages { get; } = new()
+        {
+            { "zh-CN", "zh" },
+            { "en-US", "en" },
+            { "ja-JP", "ja" },
+            { "ko-KR", "ko" },
+            { "ru-RU", "ru" },
+            { "fr-FR", "fr" },
+            { "es-ES", "es" },
+            { "pt-PT", "pt" },
+            { "it-IT", "it" },
+            { "de-DE", "de" },
+            { "vi-VN", "vi" },
+            { "th-TH", "th" },
+            { "id-ID", "id" },
+            { "ms-MY", "ms" }
+        };
+
+        public class Response
+        {
+            public string text { get; set; }
         }
     }
 }

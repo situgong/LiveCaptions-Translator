@@ -26,6 +26,7 @@ namespace LiveCaptionsTranslator.utils
             { "Youdao", Youdao },
             { "MTranServer", MTranServer },
             { "Baidu", Baidu },
+            { "MTranServerCore", MTranServerCore },
         };
 
         public static Func<string, CancellationToken, Task<string>> TranslateFunction
@@ -448,6 +449,7 @@ namespace LiveCaptionsTranslator.utils
                 return $"[Translation Failed] HTTP Error - {response.StatusCode}";
         }
 
+
         public static async Task<string> Baidu(string text, CancellationToken token = default)
         {
             var config = Translator.Setting.CurrentAPIConfig as BaiduConfig;
@@ -472,10 +474,38 @@ namespace LiveCaptionsTranslator.utils
             var content = new FormUrlEncodedContent(parameters);
             client.DefaultRequestHeaders.Clear();
 
+        public static async Task<string> MTranServerCore(string text, CancellationToken token = default)
+        {
+            var config = Translator.Setting.CurrentAPIConfig as MTranServerCoreConfig;
+            if (config == null)
+                return "[Translation Failed] Configuration error";
+
+            string targetLanguage = config.SupportedLanguages.TryGetValue(Translator.Setting.TargetLanguage, out var langValue)
+                ? langValue
+                : Translator.Setting.TargetLanguage;
+            string sourceLanguage = config.SourceLanguage;
+            string apiUrl = TextUtil.NormalizeUrl(config.ApiUrl);
+
+            var requestData = new
+            {
+                text = text,
+                to = targetLanguage,
+                from = sourceLanguage
+            };
+
+            string jsonContent = JsonSerializer.Serialize(requestData);
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {config.ApiKey}");
+
+
             HttpResponseMessage response;
             try
             {
+
                 response = await client.PostAsync(config.ApiUrl, content, token);
+                response = await client.PostAsync(apiUrl, content, token);
             }
             catch (OperationCanceledException ex)
             {
@@ -502,6 +532,11 @@ namespace LiveCaptionsTranslator.utils
             {
                 return $"[Translation Failed] HTTP Error - {response.StatusCode}";
             }
+                var responseObj = JsonSerializer.Deserialize<MTranServerCoreConfig.Response>(responseString);
+                return responseObj?.text ?? "[Translation Failed] Empty response";
+            }
+            else
+                return $"[Translation Failed] HTTP Error - {response.StatusCode}";
         }
     }
 
