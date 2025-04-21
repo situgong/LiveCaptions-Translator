@@ -17,16 +17,17 @@ namespace LiveCaptionsTranslator.utils
         public static readonly Dictionary<string, Func<string, CancellationToken, Task<string>>>
             TRANSLATE_FUNCTIONS = new()
         {
+            
             { "Google", Google },
             { "Google2", Google2 },
+            { "MTranServerCore", MTranServerCore },
             { "Ollama", Ollama },
             { "OpenAI", OpenAI },
             { "DeepL", DeepL },
             { "OpenRouter", OpenRouter },
             { "Youdao", Youdao },
             { "MTranServer", MTranServer },
-            { "Baidu", Baidu },
-            { "MTranServerCore", MTranServerCore },
+            { "Baidu", Baidu }
         };
 
         public static Func<string, CancellationToken, Task<string>> TranslateFunction

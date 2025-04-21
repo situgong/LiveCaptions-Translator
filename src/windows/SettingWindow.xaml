@@ -103,6 +103,19 @@
                             <TextBlock VerticalAlignment="Center" Text="OpenRouter" />
                         </StackPanel>
                     </ui:Button>
+                    
+                    <ui:Button
+                        x:Name="MTranServerCoreButton"
+                        Margin="10,5,10,0"
+                        Padding="10"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Left"
+                        Click="NavigationButton_Click"
+                        Tag="MTranServerCore">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center" Text="MTranServerCore" />
+                        </StackPanel>
+                    </ui:Button>
 
                     <ui:Button
                         x:Name="DeepLButton"
@@ -156,18 +169,7 @@
                         </StackPanel>
                     </ui:Button>
 
-                    <ui:Button
-                        x:Name="MTranServerCoreButton"
-                        Margin="10,5,10,0"
-                        Padding="10"
-                        HorizontalAlignment="Stretch"
-                        HorizontalContentAlignment="Left"
-                        Click="NavigationButton_Click"
-                        Tag="MTranServerCore">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock VerticalAlignment="Center" Text="MTranServerCore" />
-                        </StackPanel>
-                    </ui:Button>
+                    
                 </StackPanel>
             </Border>
             <ScrollViewer
@@ -530,6 +532,7 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
@@ -615,6 +618,7 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />  <!-- 添加第四行定义 -->
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />

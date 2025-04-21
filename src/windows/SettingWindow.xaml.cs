@@ -45,13 +45,14 @@ namespace LiveCaptionsTranslator
             {
                 { "General", ContentPanel },
                 { "Prompt", PromptSection },
+                { "MTranServerCore", MTranServerCoreSection },
                 { "Ollama", OllamaSection },
                 { "OpenAI", OpenAISection },
                 { "OpenRouter", OpenRouterSection },
                 { "DeepL", DeepLSection },
                 { "Youdao", YoudaoSection },
                 { "MTranServer", MTranServerSection },
-                { "MTranServerCore", MTranServerCoreSection },
+
                 { "Baidu", BaiduSection }
 
             };
