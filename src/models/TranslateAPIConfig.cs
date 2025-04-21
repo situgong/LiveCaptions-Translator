@@ -307,6 +307,69 @@ namespace LiveCaptionsTranslator.models
         }
     }
 
+
+    public class BaiduConfig : TranslateAPIConfig
+    {
+        public class TransResult
+        {
+            public string src {  get; set; }
+            public string dst { get; set; }
+        }
+
+        public class TranslationResult
+        {
+            public string error_code { get; set; }
+            public string from { get; set; }
+            public string to { get; set; }
+            public List<TransResult> trans_result { get; set; }
+        }
+
+        [JsonIgnore]
+        public override Dictionary<string, string> SupportedLanguages { get; } = new()
+        {
+            { "zh-CN", "zh" }, 
+            { "zh-TW", "cht" }, 
+            { "en-US", "en" },      
+            { "ja-JP", "jp" },      
+            { "ko-KR", "kor" },     
+            { "fr-FR", "fra" },      
+            { "th-TH", "th" },
+        };
+
+        private string appId = "";
+        private string appSecret = "";
+        private string apiUrl = "https://fanyi-api.baidu.com/api/trans/vip/translate";
+
+        public string AppId
+        {
+            get => appId;
+            set
+            {
+                appId = value;
+                OnPropertyChanged("AppId");
+            }
+        }
+
+        public string AppSecret
+        {
+            get => appSecret;
+            set
+            {
+                appSecret = value;
+                OnPropertyChanged("AppSecret");
+            }
+        }
+
+        public string ApiUrl
+        {
+            get => apiUrl;
+            set
+            {
+                apiUrl = value;
+                OnPropertyChanged("ApiUrl");
+            }
+        }
+
     public class MTranServerCoreConfig : TranslateAPIConfig
     {
         private string apiUrl = "http://localhost:3000/translate";
