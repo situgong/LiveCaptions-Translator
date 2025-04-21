@@ -103,7 +103,7 @@
                             <TextBlock VerticalAlignment="Center" Text="OpenRouter" />
                         </StackPanel>
                     </ui:Button>
-                    
+
                     <ui:Button
                         x:Name="MTranServerCoreButton"
                         Margin="10,5,10,0"
@@ -532,7 +532,6 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
@@ -562,23 +561,6 @@
                                         Grid.Row="1"
                                         Margin="15,10,0,0"
                                         Orientation="Vertical">
-                                        <ui:TextBlock Margin="2.5,0,0,5" Text="Target Language" />
-                                        <ComboBox
-                                            Width="200"
-                                            Height="30"
-                                            Padding="10,4,10,7"
-                                            FontSize="13.3"
-                                            IsEditable="True"
-                                            Text="{Binding Configs[MTranServer].TargetLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                            <ComboBoxItem Content="zh" />
-                                            <ComboBoxItem Content="en" />
-                                            <ComboBoxItem Content="ja" />
-                                        </ComboBox>
-                                    </StackPanel>
-                                    <StackPanel
-                                        Grid.Row="2"
-                                        Margin="15,10,0,0"
-                                        Orientation="Vertical">
                                         <ui:TextBlock Margin="2.5,0,0,5" Text="API Url" />
                                         <ui:TextBox
                                             Width="200"
@@ -588,7 +570,7 @@
                                             Text="{Binding Configs[MTranServer].ApiUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     </StackPanel>
                                     <StackPanel
-                                        Grid.Row="3"
+                                        Grid.Row="2"
                                         Margin="15,10,0,0"
                                         Orientation="Vertical">
                                         <ui:TextBlock Margin="2.5,0,0,5" Text="API Key" />
@@ -618,7 +600,6 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />  <!-- 添加第四行定义 -->
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
@@ -644,25 +625,9 @@
                                             <ComboBoxItem Content="de" />
                                         </ComboBox>
                                     </StackPanel>
+                            
                                     <StackPanel
                                         Grid.Row="1"
-                                        Margin="15,10,0,0"
-                                        Orientation="Vertical">
-                                        <ui:TextBlock Margin="2.5,0,0,5" Text="Target Language" />
-                                        <ComboBox
-                                            Width="200"
-                                            Height="30"
-                                            Padding="10,4,10,7"
-                                            FontSize="13.3"
-                                            IsEditable="True"
-                                            Text="{Binding Configs[MTranServerCore].TargetLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                            <ComboBoxItem Content="zh" />
-                                            <ComboBoxItem Content="en" />
-                                            <ComboBoxItem Content="ja" />
-                                        </ComboBox>
-                                    </StackPanel>
-                                    <StackPanel
-                                        Grid.Row="2"
                                         Margin="15,10,0,0"
                                         Orientation="Vertical">
                                         <ui:TextBlock Margin="2.5,0,0,5" Text="API Url" />
@@ -674,7 +639,7 @@
                                             Text="{Binding Configs[MTranServerCore].ApiUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     </StackPanel>
                                     <StackPanel
-                                        Grid.Row="3"
+                                        Grid.Row="2"
                                         Margin="15,10,0,0"
                                         Orientation="Vertical">
                                         <ui:TextBlock Margin="2.5,0,0,5" Text="API Key" />
