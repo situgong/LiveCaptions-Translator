@@ -271,7 +271,6 @@ namespace LiveCaptionsTranslator.models
         private string apiKey = "";
         private string apiUrl = "http://localhost:8989/translate";
         private string sourceLanguage = "en";
-        private string targetLanguage = "zh";  // 新增字段
 
         public string ApiKey
         {
@@ -299,16 +298,6 @@ namespace LiveCaptionsTranslator.models
             {
                 sourceLanguage = value;
                 OnPropertyChanged("SourceLanguage");
-            }
-        }
-
-        public string TargetLanguage  // 新增属性
-        {
-            get => targetLanguage;
-            set
-            {
-                targetLanguage = value;
-                OnPropertyChanged("TargetLanguage");
             }
         }
 
@@ -387,7 +376,6 @@ namespace LiveCaptionsTranslator.models
         private string apiUrl = "http://localhost:3000/translate";
         private string apiKey = "";
         private string sourceLanguage = "en";
-        private string targetLanguage = "zh";  // 新增字段
 
         public string ApiUrl
         {
@@ -416,16 +404,6 @@ namespace LiveCaptionsTranslator.models
             {
                 sourceLanguage = value;
                 OnPropertyChanged("SourceLanguage");
-            }
-        }
-
-        public string TargetLanguage  // 新增属性
-        {
-            get => targetLanguage;
-            set
-            {
-                targetLanguage = value;
-                OnPropertyChanged("TargetLanguage");
             }
         }
 

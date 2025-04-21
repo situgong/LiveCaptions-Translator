@@ -405,7 +405,9 @@ namespace LiveCaptionsTranslator.utils
         public static async Task<string> MTranServer(string text, CancellationToken token = default)
         {
             var config = Translator.Setting.CurrentAPIConfig as MTranServerConfig;
-            string targetLanguage = config.TargetLanguage;  // 使用配置的目标语言
+            string targetLanguage = config.SupportedLanguages.TryGetValue(Translator.Setting.TargetLanguage, out var langValue)
+                ? langValue
+                : Translator.Setting.TargetLanguage;  // 使用SupportedLanguages映射
             string sourceLanguage = config.SourceLanguage;
             string apiUrl = TextUtil.NormalizeUrl(config.ApiUrl);
 
@@ -508,7 +510,9 @@ namespace LiveCaptionsTranslator.utils
             if (config == null)
                 return "[Translation Failed] Configuration error";
 
-            string targetLanguage = config.TargetLanguage;  // 使用配置的目标语言
+            string targetLanguage = config.SupportedLanguages.TryGetValue(Translator.Setting.TargetLanguage, out var langValue)
+                ? langValue
+                : Translator.Setting.TargetLanguage;  // 使用SupportedLanguages映射
             string sourceLanguage = config.SourceLanguage;
             string apiUrl = TextUtil.NormalizeUrl(config.ApiUrl);
 
